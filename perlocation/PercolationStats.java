@@ -49,13 +49,23 @@ public class PercolationStats {
     
     
     /**
-     * Some private methods. index2Coord(). public first then private
+     * Some private methods. index2Coord(int index). public first then private
+     * randIntArray(int k)
      */
     private int[] index2Coord(int index) {         // indice are from 0 to dim * dim - 1
         int[] coord = new int[2];
         coord[0] = index / dim + 1;
         coord[1] = index % 3 + 1;
         return coord;
+    }
+    
+    private int[] randIntArray(int k) {                  // int array 1 to k
+        int[] randIntSeq = new int[k];
+        for (int i = 0; i < k; i++) {
+            randIntSeq[i] = i + 1;
+        }
+        StdRandom.shuffle(randIntSeq);
+        return randIntSeq;
     }
     
     /**
@@ -68,6 +78,7 @@ public class PercolationStats {
         int T = StdIn.readInt();
                      
         PercolationStats pStats = new PercolationStats(N, T);
+//        StdArrayIO.print(pStats.randIntArray(4));
 //        int[] coord = pStats.index2Coord(7);
 //        for (int i = 0;  i < coord.length; i++) {
 //            StdOut.println(coord[i]);
