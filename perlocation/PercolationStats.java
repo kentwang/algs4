@@ -11,7 +11,7 @@ public class PercolationStats {
     private double[] thresholds;
     private int dim;
     private int repeat;
-    private double CIMultiplier = 1.96;
+    private double confIntervMultiplier = 1.96;
     
     /**
      * Initializes the percolation
@@ -54,7 +54,7 @@ public class PercolationStats {
      * returns lower bound of the 95% confidence interval
      */
     public double confidenceLo() {
-        return StdStats.mean(thresholds) - CIMultiplier * 
+        return StdStats.mean(thresholds) - confIntervMultiplier * 
             StdStats.stddev(thresholds) / Math.sqrt(repeat);
     }
     
@@ -62,7 +62,7 @@ public class PercolationStats {
      * returns upper bound of the 95% confidence interval
      */
     public double confidenceHi() {
-        return StdStats.mean(thresholds) + CIMultiplier * 
+        return StdStats.mean(thresholds) + confIntervMultiplier * 
             StdStats.stddev(thresholds) / Math.sqrt(repeat);
     }
     
