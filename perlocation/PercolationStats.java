@@ -11,6 +11,7 @@ public class PercolationStats {
     private double[] thresholds;
     private int dim;
     private int repeat;
+    private double CIMultiplier = 1.96;
     
     /**
      * Initializes the percolation
@@ -39,28 +40,31 @@ public class PercolationStats {
      * Sample mean of percolation threshold
      */
     public double mean() {
-        double meanThreshold = 0;
-        for (int i = 0; i < thresholds.length; i++) {
-            meanThreshold += thresholds[i];
-        }
-        return meanThreshold / repeat;
+        return StdStats.mean(thresholds);
     }
     
     /**
      * Sample standard deviation of percolation threshold
      */
-//    public double stddev() {}
+    public double stddev() {
+        return StdStats.stddev(thresholds);
+    }
     
     /**
      * returns lower bound of the 95% confidence interval
      */
-//    public double confidenceLo() {}
+    public double confidenceLo() {
+        return StdStats.mean(thresholds) - CIMultiplier * 
+            StdStats.stddev(thresholds) / Math.sqrt(repeat);
+    }
     
     /**
      * returns upper bound of the 95% confidence interval
      */
-//    public double confidenceHi() {}
-    
+    public double confidenceHi() {
+        return StdStats.mean(thresholds) + CIMultiplier * 
+            StdStats.stddev(thresholds) / Math.sqrt(repeat);
+    }
     
     /**
      * Some private methods. index2Coord(int index). public first then private
@@ -91,7 +95,10 @@ public class PercolationStats {
                              
         PercolationStats pStats = new PercolationStats(N, T);
 //        StdArrayIO.print(pStats.thresholds);
-        StdOut.println(pStats.mean());
+        StdOut.println("mean                    = " + pStats.mean());
+        StdOut.println("stddev                  = " + pStats.stddev());
+        StdOut.println("95% confidence interval = " + pStats.confidenceLo() 
+                           + ", " + pStats.confidenceHi());
 
     }
     
