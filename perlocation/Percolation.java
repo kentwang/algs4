@@ -85,7 +85,7 @@ public class Percolation {
             throw new IndexOutOfBoundsException();
     }
     
-    public boolean inRangeBoolean(int i, int j) {
+    private boolean inRangeBoolean(int i, int j) {
         return !(i <= 0 || i > dim || j <= 0 || j > dim);
     }
     
