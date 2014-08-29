@@ -24,7 +24,7 @@ public class PercolationStats {
             int[] indice = randIntArray(dim * dim);             // generate random indice, should be inside each experiment
 //            StdArrayIO.print(indice);
             Percolation percolationItem = new Percolation(dim);
-            for(int j = 0; j < dim * dim; j ++) {              // run through all cells
+            for(int j = 0; j < dim * dim; j++) {              // run through all cells
                 if(percolationItem.percolates()) continue;
                 int[] coord = index2Coord(indice[j]);
 //                StdOut.println("coord");
@@ -54,16 +54,16 @@ public class PercolationStats {
      * returns lower bound of the 95% confidence interval
      */
     public double confidenceLo() {
-        return StdStats.mean(thresholds) - confIntervMultiplier * 
-            StdStats.stddev(thresholds) / Math.sqrt(repeat);
+        return StdStats.mean(thresholds) - confIntervMultiplier 
+            * StdStats.stddev(thresholds) / Math.sqrt(repeat);
     }
     
     /**
      * returns upper bound of the 95% confidence interval
      */
     public double confidenceHi() {
-        return StdStats.mean(thresholds) + confIntervMultiplier * 
-            StdStats.stddev(thresholds) / Math.sqrt(repeat);
+        return StdStats.mean(thresholds) + confIntervMultiplier 
+            * StdStats.stddev(thresholds) / Math.sqrt(repeat);
     }
     
     /**
