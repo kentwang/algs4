@@ -17,6 +17,7 @@ public class PercolationStats {
      * Initializes the percolation
      */
     public PercolationStats(int N, int T) {                    // N dimension, T repeating times
+        if(N <= 0 || T <= 0) throw new IllegalArgumentException();
         thresholds = new double[T];                             // Initialized as 0 ? Save steps to percolate
         dim = N;
         repeat = T;
