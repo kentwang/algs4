@@ -21,10 +21,13 @@ public class PercolationStats {
         repeat = T;
         for (int i = 0; i < T; i++) {                           // run T experiments
             int[] indice = randIntArray(dim * dim);             // generate random indice, should be inside each experiment
+//            StdArrayIO.print(indice);
             Percolation percolationItem = new Percolation(dim);
             for (int j = 0; j < dim * dim; j ++) {              // run through all cells
                 if (percolationItem.percolates()) continue;
                 int[] coord = index2Coord(indice[j]);
+//                StdOut.println("coord");
+//                StdArrayIO.print(coord);
                 percolationItem.open(coord[0], coord[1]);       // open site (i, j)
                 thresholds[i]++;
             }
@@ -66,7 +69,7 @@ public class PercolationStats {
     private int[] index2Coord(int index) {         // indice are from 0 to dim * dim - 1
         int[] coord = new int[2];
         coord[0] = index / dim + 1;
-        coord[1] = index % 3 + 1;
+        coord[1] = index - (coord[0] - 1) * dim + 1;
         return coord;
     }
     
@@ -83,13 +86,11 @@ public class PercolationStats {
      * test client, described below
      */
     public static void main(String[] args) {
-        StdOut.print("Enter the grid dimension N: ");
-        int N = StdIn.readInt();
-        StdOut.print("Enter the repeating times of experiments T: ");
-        int T = StdIn.readInt();
-                     
+        int N = Integer.parseInt(args[0]);
+        int T = Integer.parseInt(args[1]);
+                             
         PercolationStats pStats = new PercolationStats(N, T);
-        StdArrayIO.print(pStats.thresholds);
+//        StdArrayIO.print(pStats.thresholds);
         StdOut.println(pStats.mean());
 
     }
