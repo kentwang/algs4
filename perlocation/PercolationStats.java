@@ -17,8 +17,8 @@ public class PercolationStats {
     public PercolationStats (int N, int T) {                    // N dimension, T repeating times
         thresholds = new double[T];                             // Initialized as 0 ? Save steps to percolate
         dim = N;
-        int[] indice = randIntArray(dim * dim);             // generate random indice
         for (int i = 0; i < T; i++) {                           // run T experiments
+            int[] indice = randIntArray(dim * dim);             // generate random indice, should be inside each experiment
             Percolation percolationItem = new Percolation(dim);
             for (int j = 0; j < dim * dim; j ++) {              // run through all cells
                 if (percolationItem.percolates()) continue;
@@ -33,7 +33,13 @@ public class PercolationStats {
     /**
      * Sample mean of percolation threshold
      */
-//    public double mean() {}
+    public double mean() {
+        double meanThreshold = 0;
+        for (int i = 0; i < thresholds.length; i++) {
+            meanThreshold += thresholds[i];
+        }
+        return meanThreshold / (dim * dim);
+    }
     
     /**
      * Sample standard deviation of percolation threshold
@@ -81,6 +87,7 @@ public class PercolationStats {
         int T = StdIn.readInt();
                      
         PercolationStats pStats = new PercolationStats(N, T);
+        StdArrayIO.print(pStats.thresholds);
 
     }
     
