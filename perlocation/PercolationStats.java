@@ -17,14 +17,15 @@ public class PercolationStats {
     public PercolationStats (int N, int T) {                    // N dimension, T repeating times
         thresholds = new double[T];                             // Save steps to percolate
         dim = N;
-//        for (int i = 0; i < T; i++) {                           // run T experiments
-//            Percolation percolationItem = new Percolation(N);
-//            StdOut.println(percolationItem.percolates());
-//            while (!percolationItem.percolates()) {
-//                int row = StdRandom.uniform(1, N + 1);
-//                int col = StdRandom.uniform(1, N + 1);
-//            }
-//        }
+        int[] 
+        for (int i = 0; i < T; i++) {                           // run T experiments
+            Percolation percolationItem = new Percolation(N);
+            StdOut.println(percolationItem.percolates());
+            while (!percolationItem.percolates()) {
+                int row = StdRandom.uniform(1, N + 1);
+                int col = StdRandom.uniform(1, N + 1);
+            }
+        }
     }
     
     /**
@@ -59,10 +60,10 @@ public class PercolationStats {
         return coord;
     }
     
-    private int[] randIntArray(int k) {                  // int array 1 to k
+    private int[] randIntArray(int k) {                  // int array 0 to k - 1
         int[] randIntSeq = new int[k];
         for (int i = 0; i < k; i++) {
-            randIntSeq[i] = i + 1;
+            randIntSeq[i] = i;
         }
         StdRandom.shuffle(randIntSeq);
         return randIntSeq;
