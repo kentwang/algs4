@@ -16,16 +16,16 @@ public class PercolationStats {
     /**
      * Initializes the percolation
      */
-    public PercolationStats (int N, int T) {                    // N dimension, T repeating times
+    public PercolationStats(int N, int T) {                    // N dimension, T repeating times
         thresholds = new double[T];                             // Initialized as 0 ? Save steps to percolate
         dim = N;
         repeat = T;
-        for (int i = 0; i < T; i++) {                           // run T experiments
+        for(int i = 0; i < T; i++) {                           // run T experiments
             int[] indice = randIntArray(dim * dim);             // generate random indice, should be inside each experiment
 //            StdArrayIO.print(indice);
             Percolation percolationItem = new Percolation(dim);
-            for (int j = 0; j < dim * dim; j ++) {              // run through all cells
-                if (percolationItem.percolates()) continue;
+            for(int j = 0; j < dim * dim; j ++) {              // run through all cells
+                if(percolationItem.percolates()) continue;
                 int[] coord = index2Coord(indice[j]);
 //                StdOut.println("coord");
 //                StdArrayIO.print(coord);
@@ -79,7 +79,7 @@ public class PercolationStats {
     
     private int[] randIntArray(int k) {                  // int array 0 to k - 1
         int[] randIntSeq = new int[k];
-        for (int i = 0; i < k; i++) {
+        for(int i = 0; i < k; i++) {
             randIntSeq[i] = i;
         }
         StdRandom.shuffle(randIntSeq);
