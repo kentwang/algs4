@@ -29,10 +29,6 @@ public class Percolation {
         }
         states[N * N] = 1;
         states[N * N + 1] = 1;
-        for (int k = 0; k < dim; k++) {                     // union top and bottom 5 to top and bottom
-            cells.union(k, dim * dim);                      // union top
-            cells.union(dim * dim - k - 1, dim * dim + 1);  // union bottom
-        }
     }
     
     /**
@@ -41,16 +37,22 @@ public class Percolation {
     public void open(int i, int j) {
         isInRange(i, j);                             // validate indice
         if (isOpen(i, j)) return;
-        states[coord2Index(i, j)] = 1;
+        int siteIndex = coord2Index(i, j);           // index of new site
+        states[siteIndex] = 1;                       // open site (i, j)
+        
+        /** union to top/bottom if first/last row **/
+        if(i == 1) cell.union(siteIndex, dim * dim);
+        if(i == dim) cell.union(siteIndex, dim * dim  + 1);
+        
         /** union neighbor cells **/
         if (inRangeBoolean(i - 1, j) && isOpen(i - 1, j)) 
-            cells.union(coord2Index(i - 1, j), coord2Index(i, j));
+            cells.union(coord2Index(i - 1, j), siteIndex);
         if (inRangeBoolean(i + 1, j) && isOpen(i + 1, j)) 
-            cells.union(coord2Index(i + 1, j), coord2Index(i, j));
+            cells.union(coord2Index(i + 1, j), siteIndex);
         if (inRangeBoolean(i, j - 1) && isOpen(i, j - 1)) 
-            cells.union(coord2Index(i, j - 1), coord2Index(i, j));
+            cells.union(coord2Index(i, j - 1), siteIndex);
         if (inRangeBoolean(i, j + 1) && isOpen(i, j + 1)) 
-            cells.union(coord2Index(i, j + 1), coord2Index(i, j));
+            cells.union(coord2Index(i, j + 1), siteIndex);
     }
     
     /**
