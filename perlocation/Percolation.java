@@ -42,8 +42,8 @@ public class Percolation {
         states[siteIndex] = 1;                       // open site (i, j)
         
         /** union to top/bottom if first/last row **/
-        if(i == 1) cell.union(siteIndex, dim * dim);
-        if(i == dim) cell.union(siteIndex, dim * dim  + 1);
+        if(i == 1) cells.union(siteIndex, dim * dim);
+        if(i == dim) cells.union(siteIndex, dim * dim  + 1);
         
         /** union neighbor cells **/
         if (inRangeBoolean(i - 1, j) && isOpen(i - 1, j)) 
