@@ -10,6 +10,7 @@ public class PercolationStats {
     // Some private names to hold data
     private double[] thresholds;
     private int dim;
+    private int repeat;
     
     /**
      * Initializes the percolation
@@ -17,6 +18,7 @@ public class PercolationStats {
     public PercolationStats (int N, int T) {                    // N dimension, T repeating times
         thresholds = new double[T];                             // Initialized as 0 ? Save steps to percolate
         dim = N;
+        repeat = T;
         for (int i = 0; i < T; i++) {                           // run T experiments
             int[] indice = randIntArray(dim * dim);             // generate random indice, should be inside each experiment
             Percolation percolationItem = new Percolation(dim);
@@ -38,7 +40,7 @@ public class PercolationStats {
         for (int i = 0; i < thresholds.length; i++) {
             meanThreshold += thresholds[i];
         }
-        return meanThreshold / (dim * dim);
+        return meanThreshold / repeat;
     }
     
     /**
@@ -88,6 +90,7 @@ public class PercolationStats {
                      
         PercolationStats pStats = new PercolationStats(N, T);
         StdArrayIO.print(pStats.thresholds);
+        StdOut.println(pStats.mean());
 
     }
     
